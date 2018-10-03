@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BreathFirst;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,20 +7,17 @@ using System.Threading.Tasks;
 
 namespace Alg
 {
-    class Enemy
+    public class Enemy : IDrawable
     {
         int level;
         public Enemy(int level)
         {
             this.level = level;
         }
-        public void Kill()
+
+        public string Draw()
         {
-            level = 0;
-        }
-        public int GetLevel()
-        {
-            return level;
+            return level.ToString();
         }
     }
 }

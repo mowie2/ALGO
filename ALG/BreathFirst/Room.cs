@@ -1,28 +1,30 @@
-﻿using System;
+﻿using BreathFirst;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alg
 {
-    class Room:Node
+    public class Room : IDrawable
     {
-        private bool visited = false;
-        private char print = 'X';
+        public enum Direction { north, eacht, south, west };
+
+        private readonly Dictionary<Direction, Hall> Connections;
+
+        private string value;
+
+        public Room()
+        {
+            value = "X";
+        }
 
         public void Visit()
         {
-            visited = true;
-            print = '*';
+            value = "*";
         }
-        public bool GetVisited()
+
+        public string Draw()
         {
-            return visited;
-        }
-        public override string ToString()
-        {
-            return print.ToString();
+            return value;
         }
     }
 }
+
