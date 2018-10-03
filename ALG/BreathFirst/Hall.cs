@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BreathFirst;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Alg
 {
-    class Hall:Node
+    public class Hall : IDrawable
     {
 
         private Enemy enemy;
@@ -14,13 +15,9 @@ namespace Alg
         {
             this.enemy = new Enemy(level);
         }
-        public void Visit()
+        public string Draw()
         {
-            enemy.Kill();
-        }
-        public override string ToString()
-        {
-            return enemy.GetLevel().ToString();
+            return enemy.Draw();
         }
     }
 }
