@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Enemy.cs" />
     <Compile Include="Graph.cs" />
+    <Compile Include="Grenade.cs" />
     <Compile Include="Hall.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="IDrawable.cs" />

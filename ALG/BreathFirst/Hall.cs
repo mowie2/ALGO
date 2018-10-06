@@ -11,7 +11,7 @@ namespace Alg
     {
 
         public Room[] rooms;
-        private Enemy enemy;
+        public Enemy enemy;
         public Hall(int level, Room room1, Room room2)
         {
             this.rooms = new Room[2];
