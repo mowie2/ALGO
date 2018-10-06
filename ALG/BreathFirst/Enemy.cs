@@ -9,7 +9,7 @@ namespace Alg
 {
     public class Enemy : IDrawable
     {
-        int level;
+        public int level;
         public Enemy(int level)
         {
             this.level = level;
