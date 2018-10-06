@@ -9,7 +9,7 @@ namespace BreathFirst
 {
     class Program
     {
-        static void Main(string[] args)
+        static void TesCreateGraph()
         {
             Room[,] rooms;
 
@@ -20,6 +20,31 @@ namespace BreathFirst
                     Room temp = new Room();
                 }
             }
+        }
+
+        static void TestTalisman()
+        {
+            Room r = new Room { value = "e" };
+            Room r2 = new Room();
+            Hall h = new Hall(1,r,r2);
+            r.Connections[Room.Direction.west] = h;
+            r2.Connections[Room.Direction.east] = h;
+
+            r = r2;
+            r2 = new Room();
+            h = new Hall(1, r, r2);
+            r.Connections[Room.Direction.west] = h;
+            r2.Connections[Room.Direction.east] = h;
+            //r = r2;
+
+            TalisMan t = new TalisMan();
+            Console.Write(t.Use(r));
+        }
+
+        static void Main(string[] args)
+        {
+            TestTalisman();
+            Console.Read();
         }
     }
 }

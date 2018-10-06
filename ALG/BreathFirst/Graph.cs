@@ -8,7 +8,7 @@ namespace Alg
 {
     class Graph
     {
-        public Node root { get; set; }
+        public Room root { get; set; }
         private readonly int x;
         private readonly int y;
         public Graph(int x, int y)
