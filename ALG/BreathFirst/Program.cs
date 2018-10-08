@@ -24,7 +24,7 @@ namespace BreathFirst
 
         static void TestTalisman()
         {
-            Room r = new Room { value = "e" };
+            Room r = new Room();// { value = "e" };
             Room r2 = new Room();
             Hall h = new Hall(1,r,r2);
             r.Connections[Room.Direction.west] = h;

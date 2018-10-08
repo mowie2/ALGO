@@ -26,11 +26,7 @@ namespace BreathFirst
             foreach (Room.Direction dir in currentRoom.Connections.Keys)
             {
                 lookHall = currentRoom.Connections[dir];
-                lookRoom = currentRoom.Connections[dir].rooms[0];
-                if (lookRoom.id == currentRoom.id)
-                {
-                    lookRoom = lookHall.rooms[1];
-                }
+                lookRoom = currentRoom.Connections[dir].rooms[currentRoom];
                 
                 if(!que.Contains(lookRoom) && !visited.Contains(lookRoom) && !smallestSpanningTree.Contains(lookHall) 
                     && lowestLevel>lookHall.enemy.level)
