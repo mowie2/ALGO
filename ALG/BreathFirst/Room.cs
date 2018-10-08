@@ -5,15 +5,21 @@ namespace Alg
 {
     public class Room : IDrawable
     {
-        public enum Direction { north, eacht, south, west };
+        public enum Direction { north, east, south, west };
 
-        private readonly Dictionary<Direction, Hall> Connections;
+        public readonly Dictionary<Direction, Hall> Connections;
 
-        private string value;
+        public string value;
+
+        protected static int globalId = 0;
+        public int id = 0;
 
         public Room()
         {
+            Connections = new Dictionary<Direction, Hall>();
             value = "X";
+            globalId++;
+            id = globalId;
         }
 
         public void Visit()
