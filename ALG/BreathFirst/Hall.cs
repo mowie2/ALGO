@@ -10,13 +10,15 @@ namespace Alg
     public class Hall : IDrawable
     {
 
-        public Room[] rooms;
+        //public Dictionary<Room, Room> rooms;
         public Enemy enemy;
-        public Hall(int level, Room room1, Room room2)
+        public Hall(int level/*, Room room1, Room room2*/)
         {
-            this.rooms = new Room[2];
-            this.rooms[0] = room1;
-            this.rooms[1] = room2;
+            //this.rooms = new Dictionary<Room, Room>
+            //{
+            //    [room1] = room2,
+            //    [room2] = room1,
+            //};
             this.enemy = new Enemy(level);
         }
 

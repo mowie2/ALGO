@@ -8,5 +8,7 @@ namespace Alg
 {
     public class Hero
     {
+        Room currentRoom;
+
     }
 }

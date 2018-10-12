@@ -11,39 +11,47 @@ namespace BreathFirst
     {
         public int Use(Room startRoom)
         {
-            Room currentRoom = startRoom;
-            List<Room> que = new List<Room> { currentRoom };
-            List<Room> visited = new List<Room>();
+            Room currentRoom;
+            List<Room> que = new List<Room> { startRoom };
+            List<Room> visited = new List<Room> { startRoom };
             int count = 0;
+            bool found = false;
 
             while (true)
             {
-                if (que.Count() == 0 || currentRoom.value.Equals("e"))
+                List<Room> newQue = new List<Room>();
+                foreach (Room r in que)
+                {
+                    currentRoom = r;
+                    if(currentRoom.value.Equals("e"))
+                    {
+                        found = true;
+                        break;
+                    }
+                    foreach (Room.Direction dir in currentRoom.Connections.Keys)
+                    {
+                        //Room lookRoom = currentRoom.Connections[dir].rooms[currentRoom];
+
+                        //if (!que.Contains(lookRoom) && !visited.Contains(lookRoom))
+                        //{
+                        //    newQue.Add(lookRoom);
+                        //}
+                    }
+                    visited.Add(currentRoom);
+                }
+                que = newQue;
+                if (que.Count() == 0)
                 {
                     break;
                 }
-
-                que.Remove(currentRoom);
                 count++;
-
-                foreach (Room.Direction dir in currentRoom.Connections.Keys)
-                {
-                    Room lookRoom = currentRoom.Connections[dir].rooms[0];
-                    if (currentRoom.id == lookRoom.id)
-                    {
-                        lookRoom = currentRoom.Connections[dir].rooms[1];
-                    }
-
-                    if (!que.Contains(lookRoom) && !visited.Contains(lookRoom))
-                    {
-                        que.Add(lookRoom);
-                    }
-                }
-
-                visited.Add(currentRoom);
-                currentRoom = que[0];
             }
-            return count;
+            if (found)
+            {
+                return count;
+            }
+            Console.WriteLine("end not found");
+            return -1;
         }
 
     }

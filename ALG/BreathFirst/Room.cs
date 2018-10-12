@@ -9,7 +9,7 @@ namespace Alg
 
         public Dictionary<Direction, Hall> Connections;
         Hero hero;
-        private string value;
+        public string value;
         private bool hasVisited = false;
         int x;
         int y;
@@ -20,8 +20,7 @@ namespace Alg
             this.y = y;
             Connections = new Dictionary<Direction, Hall>();
             value = "X";
-            globalId++;
-            id = globalId;
+
         }
 
         public void Visit(Hero hero)
