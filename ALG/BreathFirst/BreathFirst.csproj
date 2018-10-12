@@ -44,12 +44,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enemy.cs" />
+    <Compile Include="Graph.cs" />
+    <Compile Include="Grenade.cs" />
     <Compile Include="Hall.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="IDrawable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Room.cs" />
+    <Compile Include="TalisMan.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -20,6 +20,8 @@ namespace Alg
             this.y = y;
             Connections = new Dictionary<Direction, Hall>();
             value = "X";
+            globalId++;
+            id = globalId;
         }
 
         public void Visit(Hero hero)
