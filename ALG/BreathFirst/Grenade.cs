@@ -16,7 +16,7 @@ namespace BreathFirst
             List<Room> visited = new List<Room>();
 
             int lowestLevel = 10;
-            Hall lowestHall = new Hall(1,new Room(),new Room());
+            //Hall lowestHall = new Hall(1,new Room(),new Room());
             Room lowestRoom = startRoom;
 
             Room currentRoom = startRoom;
@@ -26,17 +26,17 @@ namespace BreathFirst
             foreach (Room.Direction dir in currentRoom.Connections.Keys)
             {
                 lookHall = currentRoom.Connections[dir];
-                lookRoom = currentRoom.Connections[dir].rooms[currentRoom];
+               // lookRoom = currentRoom.Connections[dir].rooms[currentRoom];
                 
-                if(!que.Contains(lookRoom) && !visited.Contains(lookRoom) && !smallestSpanningTree.Contains(lookHall) 
-                    && lowestLevel>lookHall.enemy.level)
-                {
-                    lowestLevel = lookHall.enemy.level;
-                    lowestHall = lookHall;
-                    lowestRoom = lookRoom;
-                }
+                //if(!que.Contains(lookRoom) && !visited.Contains(lookRoom) && !smallestSpanningTree.Contains(lookHall) 
+                //    && lowestLevel>lookHall.enemy.level)
+                //{
+                //    lowestLevel = lookHall.enemy.level;
+                //    //lowestHall = lookHall;
+                //    lowestRoom = lookRoom;
+                //}
                 que.Add(lowestRoom);
-                smallestSpanningTree.Add(lowestHall);
+                //smallestSpanningTree.Add(lowestHall);
                 visited.Add(currentRoom);
                 currentRoom = lowestRoom;
             }

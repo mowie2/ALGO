@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Alg
 {
-    class Hero
+    public class Hero
     {
+        Room currentRoom;
+
     }
 }

@@ -30,12 +30,12 @@ namespace BreathFirst
                     }
                     foreach (Room.Direction dir in currentRoom.Connections.Keys)
                     {
-                        Room lookRoom = currentRoom.Connections[dir].rooms[currentRoom];
+                        //Room lookRoom = currentRoom.Connections[dir].rooms[currentRoom];
 
-                        if (!que.Contains(lookRoom) && !visited.Contains(lookRoom))
-                        {
-                            newQue.Add(lookRoom);
-                        }
+                        //if (!que.Contains(lookRoom) && !visited.Contains(lookRoom))
+                        //{
+                        //    newQue.Add(lookRoom);
+                        //}
                     }
                     visited.Add(currentRoom);
                 }
