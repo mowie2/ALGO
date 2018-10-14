@@ -11,7 +11,7 @@ namespace Alg
         public Room currentRoom;
         public Hero(Room visitRoom)
         {
-            visitRoom.value = "S";
+            visitRoom.Visit();
             currentRoom = visitRoom;
         }
 
