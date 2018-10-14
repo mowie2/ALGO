@@ -11,8 +11,8 @@ namespace Alg
         Hero hero;
         public string value;
         private bool hasVisited = false;
-        int x;
-        int y;
+        public int x;
+        public int y;
 
         public Room(int x, int y)
         {
@@ -25,18 +25,29 @@ namespace Alg
 
         public void Visit(Hero hero)
         {
+            this.hero = hero;
             hasVisited = true;
             value = "o";
         }
 
         public string Draw()
         {
-            if(hero == null && hasVisited)
-            {
-                return "*";
-            }
+            //if(hero != null && hasVisited)
+            //{
+            //    return "*";
+            //}
             return value;
             //return string.Format(" [{0},{1}]  ", this.x, this.y);
+        }
+
+        public void Visit()
+        {
+            value = "S";
+        }
+
+        public void Leave()
+        {
+            value = "*";
         }
 
         public void AddHall(Hall hall, Direction direction)

@@ -9,37 +9,99 @@ namespace BreathFirst
 {
     class Grenade
     {
-        public void Use(Room startRoom)
+        public List<Hall> minimumSpanningTree;
+        public Room[,] rooms;
+        public List<Hall> halls;
+
+        public Grenade(Room[,] rooms,List<Hall> halls)
         {
-            List<Hall> smallestSpanningTree = new List<Hall>();
-            List<Room> que = new List<Room>();
+            this.rooms = rooms;
+            this.halls = halls;
+            minimumSpanningTree = new List<Hall>();
+            FindMST(halls);
+        }
+
+        private void FindMST(List<Hall> halls)
+        {
+            List<Hall> que = halls.ToList();
+            List<Hall> oldQue;
+
             List<Room> visited = new List<Room>();
 
-            int lowestLevel = 10;
-            //Hall lowestHall = new Hall(1,new Room(),new Room());
-            Room lowestRoom = startRoom;
-
-            Room currentRoom = startRoom;
-            Hall lookHall;
-            Room lookRoom;
-
-            foreach (Room.Direction dir in currentRoom.Connections.Keys)
+            while (que.Count>0)
             {
-                lookHall = currentRoom.Connections[dir];
-               // lookRoom = currentRoom.Connections[dir].rooms[currentRoom];
-                
-                //if(!que.Contains(lookRoom) && !visited.Contains(lookRoom) && !smallestSpanningTree.Contains(lookHall) 
-                //    && lowestLevel>lookHall.enemy.level)
-                //{
-                //    lowestLevel = lookHall.enemy.level;
-                //    //lowestHall = lookHall;
-                //    lowestRoom = lookRoom;
-                //}
-                que.Add(lowestRoom);
-                //smallestSpanningTree.Add(lowestHall);
-                visited.Add(currentRoom);
-                currentRoom = lowestRoom;
+                oldQue = que.ToList();
+                Hall lowestHall = null;
+                Room lowestRoom1 = null;
+                Room lowestRoom2 = null;
+                foreach (Hall currentHall in oldQue)
+                {
+                    Room lookRoom1 = currentHall.rooms.First().Value;
+                    Room lookRoom2 = currentHall.rooms.Last().Value;
+                    bool criterea1 = (visited.Contains(lookRoom1) && visited.Contains(lookRoom2));
+                    bool criterea2 = (!visited.Contains(lookRoom1) && !visited.Contains(lookRoom2));
+                    if ((criterea1 || criterea2) && visited.Count>0)
+                    {
+                        if (criterea1)
+                        {
+                            que.Remove(currentHall);
+                        }
+                        continue;
+                    }
+                    if (lowestHall == null)
+                    {
+                        lowestHall = currentHall;
+                        lowestRoom1 = lookRoom1;
+                        lowestRoom2 = lookRoom2;
+                    }
+                    else
+                    {
+                        if (lowestHall.enemy.level >= currentHall.enemy.level)
+                        {
+                            lowestHall = currentHall;
+                            lowestRoom1 = lookRoom1;
+                            lowestRoom2 = lookRoom2;
+                        }
+                    }
+                    
+                }
+                if (lowestHall!=null)
+                {
+                    if(lowestRoom1 == null)
+                    {
+                        break;
+                    }
+                    minimumSpanningTree.Add(lowestHall);
+                    visited.Add(lowestRoom1);
+                    visited.Add(lowestRoom2);
+                    que.Remove(lowestHall);
+                }
             }
+        }
+
+       
+        public void Use(Room startRoom)
+        {
+            foreach(Hall currentHall in halls)
+            {
+                if (!minimumSpanningTree.Contains(currentHall))
+                {
+                    currentHall.Collapse();
+                }
+            }
+
+            Random rand = new Random();
+            List<Room.Direction> startRoomHalls = new List<Room.Direction>();
+            foreach(Room.Direction dir in startRoom.Connections.Keys)
+            {
+                Hall currentHall = startRoom.Connections[dir];
+                if (currentHall.value != "~")
+                {
+                    startRoomHalls.Add(dir);
+                }
+            }
+            int enemy2Die = rand.Next(0, startRoomHalls.Count);
+            startRoom.Connections[startRoomHalls[enemy2Die]].KillEnemy();
         }
     }
 }

@@ -13,43 +13,37 @@ namespace BreathFirst
         {
             Room currentRoom;
             List<Room> que = new List<Room> { startRoom };
-            List<Room> visited = new List<Room> { startRoom };
+            List<Room> visited = new List<Room>();
             int count = 0;
             bool found = false;
 
-            while (true)
+            while (que.Count() > 0)
             {
-                List<Room> newQue = new List<Room>();
-                foreach (Room r in que)
+                List<Room> oldQue = que.ToList();
+                foreach (Room r in oldQue)
                 {
                     currentRoom = r;
-                    if(currentRoom.value.Equals("e"))
+                    if (currentRoom.value.Equals("e"))
                     {
+                        que = new List<Room>();
                         found = true;
                         break;
                     }
                     foreach (Room.Direction dir in currentRoom.Connections.Keys)
                     {
-                        //Room lookRoom = currentRoom.Connections[dir].rooms[currentRoom];
+                        Room lookRoom = currentRoom.Connections[dir].rooms[currentRoom];
 
-                        //if (!que.Contains(lookRoom) && !visited.Contains(lookRoom))
-                        //{
-                        //    newQue.Add(lookRoom);
-                        //}
+                        if (!que.Contains(lookRoom) && !visited.Contains(lookRoom))
+                        {
+                            que.Add(lookRoom);
+                        }
                     }
                     visited.Add(currentRoom);
+                    que.Remove(currentRoom);
                 }
-                que = newQue;
-                if (que.Count() == 0)
-                {
-                    break;
-                }
-                count++;
+                if (!found) { count++; }
             }
-            if (found)
-            {
-                return count;
-            }
+            if (found) { return count; }
             Console.WriteLine("end not found");
             return -1;
         }
