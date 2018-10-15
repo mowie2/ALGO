@@ -10,9 +10,9 @@ namespace Alg
         public Dictionary<Direction, Hall> Connections;
         Hero hero;
         public string value;
-        private bool hasVisited = false;
-        int x;
-        int y;
+        public bool hasVisited = false;
+        public int x;
+        public int y;
 
         public Room(int x, int y)
         {

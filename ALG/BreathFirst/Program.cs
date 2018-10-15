@@ -1,5 +1,6 @@
 ﻿using Alg;
 using System;
+using System.Collections.Generic;
 
 namespace BreathFirst
 {
