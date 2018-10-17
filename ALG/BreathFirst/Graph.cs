@@ -12,16 +12,17 @@ namespace BreathFirst
         private readonly int roomsizeX;
         private readonly int roomsizeY;
         public Room[,] rooms;
+        public Room endRoom;
         public List<Hall> halls;
-        public Graph(int roomsizeX,int roomsizeY,/*int startX,int startY, */int endX, int endY)
+        public Graph(int roomsizeX,int roomsizeY,int endX, int endY)
         {
             this.roomsizeX = roomsizeX;
             this.roomsizeY = roomsizeY;
             this.rooms = new Room[roomsizeX, roomsizeY];
             halls = new List<Hall>();
             MakeGraph();
-            //Hero h = new Hero(rooms[startX, startY]);
-            rooms[endX, endY].value = "e";
+            this.endRoom = rooms[endX, endY];
+            this.endRoom.value = "E";
         }
 
         private void MakeGraph()
@@ -61,6 +62,14 @@ namespace BreathFirst
             
         }
 
+        public void ReviveGraph()
+        {
+            foreach (Hall currentHall in halls)
+            {
+                currentHall.value = currentHall.enemy.level.ToString();
+            }
+        }
+
         public void Draw()
         {
             for (int y = roomsizeY - 1; y >= 0; y--)
@@ -72,7 +81,6 @@ namespace BreathFirst
                     {
                         Console.Write(rooms[x, y].Connections[Room.Direction.EAST].Draw() + " ");
                     }
-
                 }
                 Console.WriteLine("");
                 for (int x = 0; x < roomsizeX; x++)
