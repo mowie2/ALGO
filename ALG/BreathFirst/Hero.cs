@@ -8,7 +8,21 @@ namespace Alg
 {
     public class Hero
     {
-        Room currentRoom;
+        public Room currentRoom;
+        public Hero(Room visitRoom)
+        {
+            visitRoom.Visit();
+            currentRoom = visitRoom;
+        }
 
+        public void visit(Room visitRoom)
+        {
+            if((currentRoom.x != visitRoom.x) && (currentRoom.y != visitRoom.y))
+            {
+                visitRoom.Visit();
+                currentRoom.Leave();
+                currentRoom = visitRoom;
+            }
+        }
     }
 }
