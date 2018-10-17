@@ -12,11 +12,13 @@ namespace Alg
 
         public Dictionary<Room, Room> rooms;
         public Enemy enemy;
+        public bool collapsed;
         public string value;
         public Hall(int level)
         {
             this.rooms = new Dictionary<Room, Room>();
             this.enemy = new Enemy(level);
+            this.collapsed = false;
             this.value = this.enemy.level.ToString();
         }
 
@@ -35,6 +37,7 @@ namespace Alg
         public void Collapse()
         {
             value = "~";
+            collapsed = true;
         }
 
         public string Draw()

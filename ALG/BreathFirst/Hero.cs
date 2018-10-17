@@ -15,7 +15,7 @@ namespace Alg
             currentRoom = visitRoom;
         }
 
-        public void visit(Room visitRoom)
+        public void Visit(Room visitRoom)
         {
             if((currentRoom.x != visitRoom.x) && (currentRoom.y != visitRoom.y))
             {

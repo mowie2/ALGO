@@ -1,26 +1,28 @@
 ﻿using Alg;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BreathFirst
 {
     public class Compas
     {
         public Room[,] rooms;
-        private readonly Hero hero;
-        public Compas(Room[,] rooms, Hero hero)
+        //private readonly Hero hero;
+        public Compas(Room[,] rooms/*, Hero hero*/)
         {
-            this.hero = hero;
+            //this.hero = hero;
             this.rooms = rooms;
         }
+
 
         public List<Room.Direction> Use(Room start, Room end)
         {
 
             Dictionary<Room, Room> previous = new Dictionary<Room, Room>();
             Dictionary<Room, int> distances = new Dictionary<Room, int>();
-            List<Room> nodes = new List<Room>();
+            List<Room> queRooms = new List<Room> { start };
 
-            List<Room.Direction> pathInDirections = null;
+            
 
             foreach (Room room in rooms)
             {
@@ -32,11 +34,63 @@ namespace BreathFirst
                 {
                     distances[room] = int.MaxValue;
                 }
+                //queRooms.Add(room);
+            }
 
-                nodes.Add(room);
+            List<Room> visited = new List<Room>();
+
+            Room currentRoom = start;
+            while (queRooms.Count>0)
+            {
+                List<Hall> queHalls = new List<Hall>();
+                foreach (Room.Direction dir in currentRoom.Connections.Keys)
+                {
+                    Hall lookHall = currentRoom.Connections[dir];
+                    Room lookRoom = lookHall.rooms[currentRoom];
+                    if (!lookHall.collapsed)
+                    {
+                        if (!visited.Contains(lookRoom) && !queRooms.Contains(lookRoom))
+                        {
+                            queRooms.Add(lookRoom);
+                            queHalls.Add(lookHall);
+                        }
+                        int lookcost = (distances[currentRoom] + lookHall.enemy.level);
+                        if (distances[lookRoom] > lookcost)
+                        {
+                            previous[lookRoom] = currentRoom;
+                            distances[lookRoom] = lookcost;
+                        }
+                    }
+                }
+                queRooms.Remove(currentRoom);
+                visited.Add(currentRoom);
+                if (queHalls.Count > 0)
+                {
+                    currentRoom = queHalls.OrderBy(pv => pv.enemy.level).ToList()[0].rooms[currentRoom];
+                } else if (queRooms.Count > 0)
+                {
+                    currentRoom = queRooms[0];
+                }
+            }
+
+            List<Room.Direction> pathInDirections = new List<Room.Direction>();
+            Room searchRoom = end;
+            
+            while (searchRoom != start)
+            {
+                Room newRoom = previous[searchRoom];
+                Room.Direction dir = newRoom.Connections.Where(pv => pv.Value.rooms[newRoom] == searchRoom).Select(pv => pv.Key).ToList()[0];
+                pathInDirections.Insert(0, dir);
+                searchRoom = newRoom;
             }
 
 
+            
+
+
+
+
+            /*
             while (nodes.Count != 0)
             {
                 nodes.Sort((x, y) => distances[x] = distances[y]);
@@ -137,11 +191,9 @@ namespace BreathFirst
                     }
                 }
             }
-
+            */
             return pathInDirections;
 
         }
-
-
     }
 }

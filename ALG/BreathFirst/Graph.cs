@@ -11,17 +11,19 @@ namespace BreathFirst
     {
         private readonly int roomsizeX;
         private readonly int roomsizeY;
-        public Room[,] rooms;
-        public List<Hall> halls;
+        public Room[,] Rooms { get; set; }
+        public Room EndRoom { get; set; }
+        public List<Hall> Halls { get; set; }
         public Graph(int roomsizeX,int roomsizeY,/*int startX,int startY, */int endX, int endY)
         {
             this.roomsizeX = roomsizeX;
             this.roomsizeY = roomsizeY;
-            this.rooms = new Room[roomsizeX, roomsizeY];
-            halls = new List<Hall>();
+            this.Rooms = new Room[roomsizeX, roomsizeY];
+            Halls = new List<Hall>();
             MakeGraph();
             //Hero h = new Hero(rooms[startX, startY]);
-            rooms[endX, endY].value = "e";
+            this.EndRoom = Rooms[endX, endY];
+            this.EndRoom.value = "E";
         }
 
         private void MakeGraph()
@@ -32,7 +34,7 @@ namespace BreathFirst
                 for (int y = 0; y < roomsizeY; y++)
                 {
                     Room temp = new Room(x, y);
-                    rooms[x, y] = temp;
+                    Rooms[x, y] = temp;
                 }
             }
 
@@ -43,18 +45,18 @@ namespace BreathFirst
                     if (x != 0)
                     {
                         Hall hall = new Hall(rand.Next(1, 10));
-                        rooms[x, y].AddHall(hall, Room.Direction.WEST);
-                        rooms[x - 1, y].AddHall(hall, Room.Direction.EAST);
-                        hall.AddConnections(rooms[x, y], rooms[x - 1, y]);
-                        halls.Add(hall);
+                        Rooms[x, y].AddHall(hall, Room.Direction.WEST);
+                        Rooms[x - 1, y].AddHall(hall, Room.Direction.EAST);
+                        hall.AddConnections(Rooms[x, y], Rooms[x - 1, y]);
+                        Halls.Add(hall);
                     }
                     if (y != 0)
                     {
                         Hall hall = new Hall(rand.Next(1, 9));
-                        rooms[x, y].AddHall(hall, Room.Direction.SOUTH);
-                        rooms[x, y - 1].AddHall(hall, Room.Direction.NORTH);
-                        hall.AddConnections(rooms[x, y], rooms[x, y - 1]);
-                        halls.Add(hall);
+                        Rooms[x, y].AddHall(hall, Room.Direction.SOUTH);
+                        Rooms[x, y - 1].AddHall(hall, Room.Direction.NORTH);
+                        hall.AddConnections(Rooms[x, y], Rooms[x, y - 1]);
+                        Halls.Add(hall);
                     }
                 }
             }
@@ -67,19 +69,19 @@ namespace BreathFirst
             {
                 for (int x = 0; x < roomsizeX; x++)
                 {
-                    Console.Write(rooms[x, y].Draw() + " ");
-                    if (rooms[x, y].HasConnection(Room.Direction.EAST))
+                    Console.Write(Rooms[x, y].Draw() + " ");
+                    if (Rooms[x, y].HasConnection(Room.Direction.EAST))
                     {
-                        Console.Write(rooms[x, y].Connections[Room.Direction.EAST].Draw() + " ");
+                        Console.Write(Rooms[x, y].Connections[Room.Direction.EAST].Draw() + " ");
                     }
 
                 }
                 Console.WriteLine("");
                 for (int x = 0; x < roomsizeX; x++)
                 {
-                    if (rooms[x, y].HasConnection(Room.Direction.SOUTH))
+                    if (Rooms[x, y].HasConnection(Room.Direction.SOUTH))
                     {
-                        Console.Write(rooms[x, y].Connections[Room.Direction.SOUTH].Draw() + "  ");
+                        Console.Write(Rooms[x, y].Connections[Room.Direction.SOUTH].Draw() + "  ");
                         Console.Write(" ");
                     }
                 }
