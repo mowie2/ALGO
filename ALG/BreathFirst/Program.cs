@@ -100,12 +100,12 @@ namespace BreathFirst
             int startY = 2;
             Hero h = new Hero(gr.Rooms[startX, startY]);
             gr.Draw();
-            //Console.WriteLine(t.Use(h.currentRoom));
+            Console.WriteLine(t.Use(h.currentRoom,gr.EndRoom));
 
-            //Grenade g = new Grenade(gr.rooms,gr.halls);
+            Grenade g = new Grenade(gr.Rooms,gr.Halls);
             //g.Use(h.currentRoom);
 
-            //gr.Draw();
+            gr.Draw();
 
             //Room[,] rooms = MaakTestGraaf();
             //PrintTestGraaf(rooms);
@@ -116,7 +116,21 @@ namespace BreathFirst
             {
                 Console.Write(dir + " ");
             }
+
+            Console.WriteLine();
+
+            g.Use(h.currentRoom);
+            gr.Draw();
+
+            k = c.Use(h.currentRoom, gr.EndRoom);
+
+            foreach (Room.Direction dir in k)
+            {
+                Console.Write(dir + " ");
+            }
             Console.ReadKey();
+
+
         }
 
     }

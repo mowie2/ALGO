@@ -9,7 +9,7 @@ namespace BreathFirst
 {
     class TalisMan
     {
-        public int Use(Room startRoom)
+        public int Use(Room startRoom,Room endRoom)
         {
             Room currentRoom;
             List<Room> que = new List<Room> { startRoom };
@@ -23,7 +23,7 @@ namespace BreathFirst
                 foreach (Room r in oldQue)
                 {
                     currentRoom = r;
-                    if (currentRoom.value.Equals("e"))
+                    if (currentRoom == endRoom)
                     {
                         que = new List<Room>();
                         found = true;
