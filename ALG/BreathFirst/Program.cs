@@ -94,44 +94,106 @@ namespace BreathFirst
 
         private static void Main(string[] args)
         {
-            Graph gr = new Graph(3, 3, 0, 0);
-            TalisMan t = new TalisMan();
-            int startX = 2;
-            int startY = 2;
+            int sizex = 0;
+            int sizey = 0;
+
+            // roomsize
+            while (sizex == 0 || sizey == 0)
+            {
+                if (sizex == 0)
+                {
+
+                    Console.WriteLine("Roomwidth:");
+                    string size = Console.ReadKey().KeyChar.ToString();
+
+                    if (!int.TryParse(size, out sizex))
+                    {
+                        Console.Clear();
+                        Console.WriteLine("please give a valid roomsize");
+                        continue;
+                    }
+                    Console.Clear();
+                }
+                if (sizey == 0)
+                {
+
+                    Console.WriteLine("RoomHeight:");
+                    string size = Console.ReadKey().KeyChar.ToString();
+
+                    if (!int.TryParse(size, out sizey))
+                    {
+                        Console.Clear();
+                        Console.WriteLine("please give a valid roomsize");
+                        continue;
+                    }
+                    Console.Clear();
+                }
+
+            }
+
+            Random rand = new Random();
+            Graph gr = new Graph(sizex, sizey, rand.Next(sizex), rand.Next(sizey));
+
+
+
+            int startX = rand.Next(sizex);
+            int startY = rand.Next(sizey);
             Hero h = new Hero(gr.Rooms[startX, startY]);
-            gr.Draw();
-            Console.WriteLine(t.Use(h.currentRoom,gr.EndRoom));
 
-            Grenade g = new Grenade(gr.Rooms,gr.Halls);
-            //g.Use(h.currentRoom);
+            TalisMan talisMan = new TalisMan();
 
-            gr.Draw();
-
-            //Room[,] rooms = MaakTestGraaf();
-            //PrintTestGraaf(rooms);
-
-            Compas c = new Compas(gr.Rooms);
-            List<Room.Direction> k = c.Use(h.currentRoom,gr.EndRoom);
-            foreach(Room.Direction dir in k)
+            while (true)
             {
-                Console.Write(dir + " ");
+                //Console.Clear();
+                Console.WriteLine("");
+                gr.Draw();
+                Console.WriteLine("");
+                string key = Console.ReadKey().KeyChar.ToString();
+                int ky = 9;
+                if (!int.TryParse(key, out ky))
+                {
+                    Console.Clear();
+                    Console.WriteLine("please select a valid key");
+                    Console.WriteLine("1: talisman");
+                    Console.WriteLine("2: gernade");
+                    Console.WriteLine("3: compas");
+                    Console.WriteLine("4: exit");
+                    continue;
+                }
+
+                switch (ky)
+                {
+                    case 1:
+                        Console.WriteLine("exit is" + talisMan.Use(h.currentRoom, gr.EndRoom) + " steps away");
+                        continue;
+                    case 2:
+                        Grenade g = new Grenade(gr.Rooms, gr.Halls);
+                        continue;
+                    case 3:
+                        Compas c = new Compas(gr.Rooms);
+
+                        List<Room.Direction> k = c.Use(h.currentRoom, gr.EndRoom);
+
+                        foreach (Room.Direction dir in k)
+                        {
+                            Console.Write(dir + " ");
+                        }
+                        List<Hall> halls = c.GetHalls(k, h.currentRoom);
+                        Console.WriteLine("Enemy levels: ");
+                        foreach (Hall hall in halls)
+                        {
+                            Console.Write("level " + hall.enemy.level + " ");
+                        }
+                        continue;
+                    case 4:
+                        Console.WriteLine();
+
+                        Console.WriteLine("Thank you for playing!");
+                        Console.ReadKey();
+                        Environment.Exit(0);
+                        break;
+                }
             }
-
-            Console.WriteLine();
-
-            g.Use(h.currentRoom);
-            gr.Draw();
-
-            k = c.Use(h.currentRoom, gr.EndRoom);
-
-            foreach (Room.Direction dir in k)
-            {
-                Console.Write(dir + " ");
-            }
-            Console.ReadKey();
-
-
         }
-
     }
 }
