@@ -8,69 +8,365 @@ namespace BreathFirst
     {
         public static Room[,] MaakTestGraaf()
         {
-            Room[,] rooms = new Room[2, 3];
+            Room[,] rooms = new Room[5, 5];
 
-            Room nRoom1 = new Room(1, 2);
-            Room nRoom2 = new Room(0, 2);
-            Hall haa = new Hall(2);
+            int x = 0;
+            int y = 4;
+            int oldofset = 0;
+            int newofset = 1;
+
+            Room nRoom1 = new Room(x + oldofset, y);
+            Room nRoom2 = new Room(x+ oldofset+newofset, y);
+            Hall haa = new Hall(7);
             haa.AddConnections(nRoom1, nRoom2);
-            nRoom1.Connections[Room.Direction.WEST] = haa;
-            nRoom2.Connections[Room.Direction.EAST] = haa;
-            rooms[1, 2] = nRoom1;
-            rooms[0, 2] = nRoom2;
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+            rooms[x + oldofset , y] = nRoom1;
+            rooms[x + oldofset + newofset, y] = nRoom2;
 
-            nRoom1 = rooms[1, 2];
-            nRoom2 = new Room(1, 1);
+            nRoom1 = rooms[x+oldofset, y];
+            nRoom2 = new Room(x + oldofset, y-1);
+            haa = new Hall(1);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset, y - 1] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset + newofset, y];
+            nRoom2 = new Room(x + oldofset + newofset, y - 1);
+            haa = new Hall(2);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset + newofset, y - 1] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset , y-1];
+            nRoom2 = rooms[x + oldofset + newofset, y - 1];
+            haa = new Hall(5);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+            
+
+            nRoom1 = rooms[x + oldofset, y-1];
+            nRoom2 = new Room(x + oldofset, y - 2);
+            haa = new Hall(1);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset, y - 2] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset + newofset, y-1];
+            nRoom2 = new Room(x + oldofset + newofset, y - 2);
             haa = new Hall(6);
             haa.AddConnections(nRoom1, nRoom2);
             nRoom1.Connections[Room.Direction.SOUTH] = haa;
             nRoom2.Connections[Room.Direction.NORTH] = haa;
-            rooms[1, 1] = nRoom2;
+            rooms[x + oldofset + newofset, y - 2] = nRoom2;
 
-            nRoom1 = rooms[0, 2];
-            nRoom2 = new Room(0, 1);
+            nRoom1 = rooms[x + oldofset, y - 2];
+            nRoom2 = rooms[x + oldofset + newofset, y - 2];
+            haa = new Hall(5);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+
+
+
+
+
+
+            nRoom1 = rooms[x + oldofset, y - 2];
+            nRoom2 = new Room(x + oldofset, y - 3);
+            haa = new Hall(4);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset, y - 3] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset + newofset, y - 2];
+            nRoom2 = new Room(x + oldofset + newofset, y - 3);
             haa = new Hall(5);
             haa.AddConnections(nRoom1, nRoom2);
             nRoom1.Connections[Room.Direction.SOUTH] = haa;
             nRoom2.Connections[Room.Direction.NORTH] = haa;
-            rooms[0, 1] = nRoom2;
+            rooms[x + oldofset + newofset, y - 3] = nRoom2;
 
-            nRoom1 = rooms[1, 1];
-            nRoom2 = rooms[0, 1];
-            haa = new Hall(9);
+            nRoom1 = rooms[x + oldofset, y - 3];
+            nRoom2 = rooms[x + oldofset + newofset, y - 3];
+            haa = new Hall(4);
             haa.AddConnections(nRoom1, nRoom2);
-            nRoom1.Connections[Room.Direction.WEST] = haa;
-            nRoom2.Connections[Room.Direction.EAST] = haa;
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
 
-            nRoom1 = rooms[1, 1];
-            nRoom2 = new Room(1, 0);
+            nRoom1 = rooms[x + oldofset, y - 3];
+            nRoom2 = new Room(x + oldofset, y - 4);
             haa = new Hall(6);
             haa.AddConnections(nRoom1, nRoom2);
             nRoom1.Connections[Room.Direction.SOUTH] = haa;
             nRoom2.Connections[Room.Direction.NORTH] = haa;
-            rooms[1, 0] = nRoom2;
+            rooms[x + oldofset, y - 4] = nRoom2;
 
-            nRoom1 = rooms[0, 1];
-            nRoom2 = new Room(0, 0);
+            nRoom1 = rooms[x + oldofset + newofset, y - 3];
+            nRoom2 = new Room(x + oldofset + newofset, y - 4);
             haa = new Hall(6);
             haa.AddConnections(nRoom1, nRoom2);
             nRoom1.Connections[Room.Direction.SOUTH] = haa;
             nRoom2.Connections[Room.Direction.NORTH] = haa;
-            rooms[0, 0] = nRoom2;
+            rooms[x + oldofset + newofset, y - 4] = nRoom2;
 
-            nRoom1 = rooms[1, 0];
-            nRoom2 = rooms[0, 0];
+            nRoom1 = rooms[x + oldofset, y - 4];
+            nRoom2 = rooms[x + oldofset + newofset, y - 4];
+            haa = new Hall(4);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            oldofset++;
+
+            nRoom1 = rooms[x + oldofset, y];
+            nRoom2 = new Room(x + oldofset + newofset, y);
             haa = new Hall(9);
             haa.AddConnections(nRoom1, nRoom2);
-            nRoom1.Connections[Room.Direction.WEST] = haa;
-            nRoom2.Connections[Room.Direction.EAST] = haa;
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+            rooms[x + oldofset + newofset, y] = nRoom2; 
+
+            nRoom1 = rooms[x + oldofset + newofset, y ];
+            nRoom2 = new Room(x + oldofset + newofset, y - 1);
+            haa = new Hall(8);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset + newofset, y - 1] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset, y - 1];
+            nRoom2 = rooms[x + oldofset + newofset, y - 1];
+            haa = new Hall(7);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+
+            nRoom1 = rooms[x + oldofset + newofset, y-1];
+            nRoom2 = new Room(x + oldofset + newofset, y - 2);
+            haa = new Hall(7);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset + newofset, y - 2] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset, y - 2];
+            nRoom2 = rooms[x + oldofset + newofset, y - 2];
+            haa = new Hall(5);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+
+            nRoom1 = rooms[x + oldofset + newofset, y - 2];
+            nRoom2 = new Room(x + oldofset + newofset, y - 3);
+            haa = new Hall(3);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset + newofset, y - 3] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset, y - 3];
+            nRoom2 = rooms[x + oldofset + newofset, y - 3];
+            haa = new Hall(2);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+
+            nRoom1 = rooms[x + oldofset + newofset, y - 3];
+            nRoom2 = new Room(x + oldofset + newofset, y - 4);
+            haa = new Hall(6);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset + newofset, y - 4] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset, y - 4];
+            nRoom2 = rooms[x + oldofset + newofset, y - 4];
+            haa = new Hall(2);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+
+
+
+
+
+
+
+
+            oldofset++;
+
+            nRoom1 = rooms[x + oldofset, y];
+            nRoom2 = new Room(x + oldofset + newofset, y);
+            haa = new Hall(8);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+            rooms[x + oldofset + newofset, y] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset + newofset, y];
+            nRoom2 = new Room(x + oldofset + newofset, y - 1);
+            haa = new Hall(6);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset + newofset, y - 1] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset, y - 1];
+            nRoom2 = rooms[x + oldofset + newofset, y - 1];
+            haa = new Hall(4);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+
+            nRoom1 = rooms[x + oldofset + newofset, y - 1];
+            nRoom2 = new Room(x + oldofset + newofset, y - 2);
+            haa = new Hall(4);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset + newofset, y - 2] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset, y - 2];
+            nRoom2 = rooms[x + oldofset + newofset, y - 2];
+            haa = new Hall(6);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+
+            nRoom1 = rooms[x + oldofset + newofset, y - 2];
+            nRoom2 = new Room(x + oldofset + newofset, y - 3);
+            haa = new Hall(7);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset + newofset, y - 3] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset, y - 3];
+            nRoom2 = rooms[x + oldofset + newofset, y - 3];
+            haa = new Hall(4);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+
+            nRoom1 = rooms[x + oldofset + newofset, y - 3];
+            nRoom2 = new Room(x + oldofset + newofset, y - 4);
+            haa = new Hall(4);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset + newofset, y - 4] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset, y - 4];
+            nRoom2 = rooms[x + oldofset + newofset, y - 4];
+            haa = new Hall(2);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+
+
+            oldofset++;
+
+            nRoom1 = rooms[x + oldofset, y];
+            nRoom2 = new Room(x + oldofset + newofset, y);
+            haa = new Hall(3);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+            rooms[x + oldofset + newofset, y] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset + newofset, y];
+            nRoom2 = new Room(x + oldofset + newofset, y - 1);
+            haa = new Hall(6);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset + newofset, y - 1] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset, y - 1];
+            nRoom2 = rooms[x + oldofset + newofset, y - 1];
+            haa = new Hall(4);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+
+            nRoom1 = rooms[x + oldofset + newofset, y - 1];
+            nRoom2 = new Room(x + oldofset + newofset, y - 2);
+            haa = new Hall(3);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset + newofset, y - 2] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset, y - 2];
+            nRoom2 = rooms[x + oldofset + newofset, y - 2];
+            haa = new Hall(2);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+
+            nRoom1 = rooms[x + oldofset + newofset, y - 2];
+            nRoom2 = new Room(x + oldofset + newofset, y - 3);
+            haa = new Hall(2);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset + newofset, y - 3] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset, y - 3];
+            nRoom2 = rooms[x + oldofset + newofset, y - 3];
+            haa = new Hall(2);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+
+            nRoom1 = rooms[x + oldofset + newofset, y - 3];
+            nRoom2 = new Room(x + oldofset + newofset, y - 4);
+            haa = new Hall(7);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.SOUTH] = haa;
+            nRoom2.Connections[Room.Direction.NORTH] = haa;
+            rooms[x + oldofset + newofset, y - 4] = nRoom2;
+
+            nRoom1 = rooms[x + oldofset, y - 4];
+            nRoom2 = rooms[x + oldofset + newofset, y - 4];
+            haa = new Hall(3);
+            haa.AddConnections(nRoom1, nRoom2);
+            nRoom1.Connections[Room.Direction.EAST] = haa;
+            nRoom2.Connections[Room.Direction.WEST] = haa;
+
+
+
+
+
             return rooms;
         }
         public static void PrintTestGraaf(Room[,] rooms)
         {
-            for (int y = 3 - 1; y >= 0; y--)
+            int xint = 5;
+            int yint =5;
+            for (int y = yint - 1; y >= 0; y--)
             {
-                for (int x = 0; x < 2; x++)
+                for (int x = 0; x < xint; x++)
                 {
                     Console.Write(rooms[x, y].Draw() + " ");
                     if (rooms[x, y].HasConnection(Room.Direction.EAST))
@@ -80,7 +376,7 @@ namespace BreathFirst
 
                 }
                 Console.WriteLine("");
-                for (int x = 0; x < 2; x++)
+                for (int x = 0; x < xint; x++)
                 {
                     if (rooms[x, y].HasConnection(Room.Direction.SOUTH))
                     {
@@ -94,6 +390,7 @@ namespace BreathFirst
 
         private static void Main(string[] args)
         {
+
             int sizex = 0;
             int sizey = 0;
 
@@ -168,6 +465,8 @@ namespace BreathFirst
                         continue;
                     case 2:
                         Grenade g = new Grenade(gr.Rooms, gr.Halls);
+                        g.Use(h.currentRoom);
+                        gr.Draw();
                         continue;
                     case 3:
                         Compas c = new Compas(gr.Rooms);

@@ -33,7 +33,7 @@ namespace BreathFirst
                     {
                         Room lookRoom = currentRoom.Connections[dir].rooms[currentRoom];
 
-                        if (!que.Contains(lookRoom) && !visited.Contains(lookRoom))
+                        if (!que.Contains(lookRoom) && !visited.Contains(lookRoom) && !currentRoom.Connections[dir].collapsed)
                         {
                             que.Add(lookRoom);
                         }

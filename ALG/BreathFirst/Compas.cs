@@ -7,10 +7,8 @@ namespace BreathFirst
     public class Compas
     {
         public Room[,] rooms;
-        //private readonly Hero hero;
-        public Compas(Room[,] rooms/*, Hero hero*/)
+        public Compas(Room[,] rooms)
         {
-            //this.hero = hero;
             this.rooms = rooms;
         }
 
@@ -34,7 +32,6 @@ namespace BreathFirst
                 {
                     distances[room] = int.MaxValue;
                 }
-                //queRooms.Add(room);
             }
 
             List<Room> visited = new List<Room>();
@@ -49,14 +46,11 @@ namespace BreathFirst
                     Room lookRoom = lookHall.rooms[currentRoom];
                     if (!lookHall.collapsed)
                     {
-                        if (!visited.Contains(lookRoom) && !queRooms.Contains(lookRoom))
-                        {
-                            queRooms.Add(lookRoom);
-                            queHalls.Add(lookHall);
-                        }
                         int lookcost = (distances[currentRoom] + lookHall.enemy.level);
                         if (distances[lookRoom] > lookcost)
                         {
+                            queRooms.Add(lookRoom);
+                            queHalls.Add(lookHall);
                             previous[lookRoom] = currentRoom;
                             distances[lookRoom] = lookcost;
                         }
@@ -92,7 +86,7 @@ namespace BreathFirst
         public List<Hall> GetHalls(List<Room.Direction> directions, Room currentRoom)
         {
             List<Hall> enemies = new List<Hall>();
-            directions.Reverse();
+            //directions.Reverse();
 
             enemies.Add(currentRoom.Connections[directions[0]]);
             directions.RemoveAt(0);
