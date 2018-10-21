@@ -18,7 +18,7 @@ namespace BreathFirst
             this.rooms = rooms;
             this.halls = halls;
             minimumSpanningTree = new List<Hall>();
-            FindMST(halls);
+            //FindMST(halls);
         }
 
         private void FindMST(List<Hall> halls)
@@ -130,7 +130,7 @@ namespace BreathFirst
 
         public void Use(Room startRoom)
         {
-            //FindMSTPrim(startRoom);
+            FindMSTPrim(startRoom);
             foreach(Hall currentHall in halls)
             {
                 if (!minimumSpanningTree.Contains(currentHall))
