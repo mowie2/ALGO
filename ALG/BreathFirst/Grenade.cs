@@ -63,7 +63,6 @@ namespace BreathFirst
                             lowestRoom2 = lookRoom2;
                         }
                     }
-                    
                 }
                 if (lowestHall!=null)
                 {
@@ -79,9 +78,59 @@ namespace BreathFirst
             }
         }
 
-       
+
+        public void FindMSTPrim(Room startRoom)
+        {
+            Room currentRoom = startRoom;
+            List<Hall> que = new List<Hall>();
+            List<Room> visited = new List<Room>();
+
+            while (currentRoom != null)
+            {
+                foreach (Room.Direction dir in currentRoom.Connections.Keys)
+                {
+                    Hall currentHall = currentRoom.Connections[dir];
+                    Room lookRoom = currentHall.rooms[currentRoom];
+                    if (!que.Contains(currentHall) && !minimumSpanningTree.Contains(currentHall) && !visited.Contains(lookRoom))
+                    {
+                        que.Add(currentHall);
+                    }
+                }
+                visited.Add(currentRoom);
+
+
+                Room lowestRoom = null;
+                Hall lowestHall = null;
+                que = que.OrderBy(r => r.enemy.level).ToList();
+                while (lowestRoom == null && que.Count > 0)
+                {
+                    lowestHall = que[0];
+                    Room lookRoom1 = lowestHall.rooms.First().Value;
+                    Room lookRoom2 = lowestHall.rooms.Last().Value;
+                    if (!visited.Contains(lookRoom1) || !visited.Contains(lookRoom2))
+                    {
+                        lowestRoom = lookRoom1;
+                        if (!visited.Contains(lookRoom2))
+                        {
+                            lowestRoom = lookRoom2;
+                        }
+                    }
+                    else { que.Remove(lowestHall); }
+                }
+
+                if (lowestRoom != null)
+                {
+                    minimumSpanningTree.Add(lowestHall);
+                }
+                que.Remove(lowestHall);
+                currentRoom = lowestRoom;
+            }
+        }
+
+
         public void Use(Room startRoom)
         {
+            //FindMSTPrim(startRoom);
             foreach(Hall currentHall in halls)
             {
                 if (!minimumSpanningTree.Contains(currentHall))
