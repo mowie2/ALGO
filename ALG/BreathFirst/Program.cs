@@ -431,13 +431,15 @@ namespace BreathFirst
             Random rand = new Random();
             Graph gr = new Graph(sizex, sizey, rand.Next(sizex), rand.Next(sizey));
 
-
+            
 
             int startX = rand.Next(sizex);
             int startY = rand.Next(sizey);
-            Hero h = new Hero(gr.Rooms[startX, startY]);
-
+            Hero h = new Hero(gr.Rooms[0, 0]);
+            //Hero h = new Hero(gr.Rooms[0,0]);
             TalisMan talisMan = new TalisMan();
+            Grenade g = new Grenade(gr.Rooms, gr.Halls);
+            Compas c = new Compas(gr.Rooms);
 
             while (true)
             {
@@ -464,13 +466,9 @@ namespace BreathFirst
                         Console.WriteLine("exit is" + talisMan.Use(h.currentRoom, gr.EndRoom) + " steps away");
                         continue;
                     case 2:
-                        Grenade g = new Grenade(gr.Rooms, gr.Halls);
                         g.Use(h.currentRoom);
-                        gr.Draw();
                         continue;
                     case 3:
-                        Compas c = new Compas(gr.Rooms);
-
                         List<Room.Direction> k = c.Use(h.currentRoom, gr.EndRoom);
 
                         foreach (Room.Direction dir in k)
