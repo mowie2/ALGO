@@ -94,60 +94,75 @@ namespace BreathFirst
 
             while (directions.Count() != 0)
             {
+                if(directions.Count == 1)
+                {
+                    break;
+                }
                 if (directions.Count != 0 && directions[0] == Room.Direction.EAST)
                 {
                     currentRoom = rooms[currentRoom.x + 1, currentRoom.y];
-                    enemies.Add(currentRoom.Connections[directions[0]]);
-                    currentRoom.Visit();
+                    if (directions.Count != 1)
+                    {
+                        enemies.Add(currentRoom.Connections[directions[0]]);
 
-                    if(directions.Count == 1)
+                        currentRoom.Visit();
+                    }
+
+                    if (directions.Count == 1)
                     {
                         currentRoom.value = "E";
                     }
-                    directions.RemoveAt(0);
 
                 }
                 if (directions.Count != 0 && directions[0] == Room.Direction.WEST)
                 {
                     currentRoom = rooms[currentRoom.x - 1, currentRoom.y];
-                    enemies.Add(currentRoom.Connections[directions[0]]);
+                    if (directions.Count != 1)
+                    {
+                        enemies.Add(currentRoom.Connections[directions[0]]);
 
-
-                    currentRoom.Visit();
+                        currentRoom.Visit();
+                    }
 
 
                     if (directions.Count == 1)
                     {
                         currentRoom.value = "E";
                     }
-                    directions.RemoveAt(0);
                 }
                 if (directions.Count != 0 && directions[0] == Room.Direction.NORTH)
                 {
                     currentRoom = rooms[currentRoom.x, currentRoom.y + 1];
-                    enemies.Add(currentRoom.Connections[directions[0]]);
+                    if (directions.Count != 1)
+                    {
+                        enemies.Add(currentRoom.Connections[directions[0]]);
 
-                    currentRoom.Visit();
+                        currentRoom.Visit();
+                    }
+
 
                     if (directions.Count == 1)
                     {
                         currentRoom.value = "E";
                     }
-                    directions.RemoveAt(0);
                 }
                 if (directions.Count != 0 && directions[0] == Room.Direction.SOUTH)
                 {
                     currentRoom = rooms[currentRoom.x, currentRoom.y - 1];
-                    enemies.Add(currentRoom.Connections[directions[0]]);
+                    if (directions.Count != 1)
+                    {
+                        enemies.Add(currentRoom.Connections[directions[0]]);
 
-                    currentRoom.Visit();
+                        currentRoom.Visit();
+                    }
 
                     if (directions.Count == 1)
                     {
                         currentRoom.value = "E";
                     }
-                    directions.RemoveAt(0);
+                    
                 }
+                directions.RemoveAt(0);
             }
 
 
